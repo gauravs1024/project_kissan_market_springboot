@@ -14,8 +14,8 @@ import com.major.kisaan.user.User;
 @RestController
 @CrossOrigin
 public class MyControls {
-	
-	@Autowired
+
+    @Autowired
     private final UserServices userService;
 
     public MyControls(UserServices userService) {
@@ -25,18 +25,17 @@ public class MyControls {
     @PostMapping("/register")
     public String register(@RequestBody User user) {
         userService.registerUser(user);
-        System.out.println("user-->"+new Gson().toJson(user));
+        System.out.println("user-->" + new Gson().toJson(user));
         return "User registered successfully!";
     }
 
     @PostMapping("/login")
     public String login(@RequestParam String phoneNumber, @RequestParam String password) {
         User user = userService.login(phoneNumber, password);
-        System.out.println("user-->"+new Gson().toJson(user));
+        System.out.println("user-->" + new Gson().toJson(user));
         if (user != null) {
             return "Login successful! Welcome, " + user.getName();
         }
-        return "Invalid phone number or password.";
+        return "Invalid phone number and password.";
     }
 }
-
